@@ -5,7 +5,7 @@ const isProd = process.env.NODE_ENV === "production";
 const nextConfig: NextConfig = {
   output: "export",
   assetPrefix: isProd
-    ? "https://cdn.jsdelivr.net/gh/joashhsaoj/Yrksed@static/out/"
+    ? "https://cdn.jsdelivr.net/gh/joashhsaoj/Yrksed@main/out/"
     : "",
   /* config options here */
 };
