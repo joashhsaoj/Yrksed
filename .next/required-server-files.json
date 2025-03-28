@@ -12,7 +12,7 @@
     },
     "distDir": ".next",
     "cleanDistDir": true,
-    "assetPrefix": "https://cdn.jsdelivr.net/gh/joashhsaoj/Yrksed@static/out/",
+    "assetPrefix": "https://cdn.jsdelivr.net/gh/joashhsaoj/Yrksed@main/out/",
     "cacheMaxMemorySize": 52428800,
     "configOrigin": "next.config.ts",
     "useFileSystemPublicRoutes": true,
