@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -8,6 +10,10 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 
 export default function Mode() {
   const [mode, setMode] = useLocalStorage("mode");
+
+  useEffect(() => {
+    window.parent.postMessage(mode, "*");
+  }, [mode]);
 
   return (
     <div className="flex items-center justify-between">

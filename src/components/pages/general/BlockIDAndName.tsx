@@ -23,7 +23,7 @@ export default function Block() {
       className="w-[350px] space-y-2"
     >
       <div className="flex items-center justify-between">
-        <h4 className="text-sm font-semibold">Block ID and Name</h4>
+        <h4 className="text-sm font-semibold">Block ID and Name{}</h4>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="sm" className="w-9 p-0">
             <ChevronsUpDown className="h-4 w-4" />
