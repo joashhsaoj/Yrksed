@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
+// const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  assetPrefix: isProd
-    ? "https://cdn.jsdelivr.net/gh/joashhsaoj/Yrksed@main/out/"
-    : "",
+  // output: "export",
+  // assetPrefix: isProd
+  //   ? "https://cdn.jsdelivr.net/gh/joashhsaoj/Yrksed@main/out/"
+  //   : "",
   /* config options here */
 };
 
