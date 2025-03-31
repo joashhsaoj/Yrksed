@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ export default function StartAndStop() {
     >
       {isStarted ? (
         <>
-          <CirclePause /> STOP
+          <CirclePause /> Stop
         </>
       ) : (
         <>
