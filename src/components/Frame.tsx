@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import StartAndStop from "./pages/general/StartAndStop";
-import Main from "./pages/general/Main";
-import Secondary from "./pages/general/Secondary";
-import Mode from "./pages/other/Mode";
+import StartAndStop from "./tabs/general/StartAndStop";
+import Main from "./tabs/general/Main";
+import Secondary from "./tabs/general/Secondary";
+import Mode from "./tabs/other/Mode";
 
 export default function Frame() {
   return (
