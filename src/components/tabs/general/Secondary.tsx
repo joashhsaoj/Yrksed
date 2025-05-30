@@ -1,6 +1,8 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useState } from "react";
+
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,12 +14,32 @@ import { Separator } from "@/components/ui/separator";
 
 import { ChevronsUpDown } from "lucide-react";
 
-import PauseWhenNotBlock from "./PauseWhenNotBlock";
-import BlockGenders from "./BlockGenders";
-import DeleteUser from "./DeleteUser";
+import PauseWhenNotBlock from "./pause-when-not-block";
+import BlockGenders from "./block-genders";
+import DeleteUser from "./delete-user";
+
+type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
 
 export default function Secondary() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [mode] = useLocalStorage("mode");
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [gendersChecked, setGendersChecked] = useState<GendersChecked>({
+    male: mode !== "origin",
+    female: !["default", "origin"].includes(mode),
+    unknown: mode !== "origin",
+  });
+
+  useEffect(() => {
+    console.log(gendersChecked);
+    window.parent.postMessage(
+      {
+        genders: gendersChecked,
+      },
+      "*"
+    );
+  }, [gendersChecked]);
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
@@ -36,7 +58,10 @@ export default function Secondary() {
         <div className="border rounded-md p-1 space-y-1">
           <PauseWhenNotBlock />
           <Separator />
-          <BlockGenders />
+          <BlockGenders
+            gendersChecked={gendersChecked}
+            setGendersChecked={setGendersChecked}
+          />
           <Separator />
           <DeleteUser />
         </div>

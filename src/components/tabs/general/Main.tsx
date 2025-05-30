@@ -1,4 +1,4 @@
-import BlockIDAndName from "./BlockIDAndName";
+import BlockIDAndName from "./block-id-and-name";
 
 export default function Main() {
   return (

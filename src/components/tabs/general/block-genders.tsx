@@ -1,34 +1,22 @@
-import React from "react";
-
-import useLocalStorage from "@/hooks/useLocalStorage";
-
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export default function BlockGenders() {
-  const [mode] = useLocalStorage("mode");
+type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
 
+interface BlockGendersProps {
+  gendersChecked: GendersChecked;
+  setGendersChecked: React.Dispatch<React.SetStateAction<GendersChecked>>;
+}
+
+export default function BlockGenders({
+  gendersChecked,
+  setGendersChecked,
+}: BlockGendersProps) {
   const genders = [
     { id: "male", label: "Male" },
     { id: "female", label: "Female" },
     { id: "unknown", label: "Unknown" },
   ] as const;
-
-  type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
-  const [gendersChecked, setGendersChecked] = React.useState<GendersChecked>({
-    male: mode !== "origin",
-    female: !["default", "origin"].includes(mode),
-    unknown: mode !== "origin",
-  });
-
-  React.useEffect(() => {
-    window.parent.postMessage(
-      {
-        genders: gendersChecked,
-      },
-      "*"
-    );
-  }, [gendersChecked]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
