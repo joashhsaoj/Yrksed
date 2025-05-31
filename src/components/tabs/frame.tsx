@@ -11,9 +11,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import Secondary from "./general/secondary";
-import Main from "./general/main";
-import Mode from "./other/mode";
+import Secondary from "./general/secondary_";
+import Main from "./general/main_";
+import Mode from "./other/mode_";
 import StartAndStop from "./general/start-and-stop";
 
 export default function Frame() {
