@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StartAndStop from "@/components/tabs/general/start-and-stop";
 import Main from "@/components/tabs/general/main";
 import Secondary from "@/components/tabs/general/secondary";
-import Mode from "@/components/tabs/other/mode";
+import Mode from "@/components/tabs/other/Mode";
 
 export default function Frame() {
   return (
