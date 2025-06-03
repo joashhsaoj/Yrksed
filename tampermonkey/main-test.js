@@ -27,12 +27,12 @@
   container.style.position = "fixed";
   container.style.top = "0px";
   container.style.right = "0px";
-  container.style.zIndex = "19991999";
+  container.style.zIndex = "20000000";
   container.style.cursor = "move";
-  container.style.width = "400px";
-  container.style.height = "420px";
-  container.style.top = "300px";
-  container.style.right = "-350px";
+  container.style.width = "420px";
+  container.style.height = "400px";
+  container.style.top = "175px";
+  container.style.right = "-300px";
   container.style.border = "5px solid black";
   container.style.overflow = "none"; //container.style.borderLeft = "10px solid black"; //container.style.borderBottom = "10px solid transparent"; //container.allow = "fullscreen; clipboard-read; clipboard-write";
   container.sandbox = "allow-scripts allow-same-origin allow-forms";
@@ -156,7 +156,8 @@
   document.head.appendChild(script);
 
   const mode_default = {
-    "v1.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "网调瘦弱骚b母🐶m"],
+    // "v1.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "网调瘦弱骚b母🐶m"],
+    "v1.web1v1.cn": ["08657a5149a948cfadada6e4443df049", "网调瘦弱骚b母🐶m"],
 
     "v2.chatbbq.cn": ["afcf520e69a44d59a26cf4bfe8e69fe0", "爱黑逼大陰唇大奶頭"],
     "v20.chatbbq.cn": [
@@ -327,7 +328,6 @@
   // var dic_userlists = {};
 
   ws.close();
-
   const OriginalWebSocket = window.WebSocket;
   // 覆盖 WebSocket 构造函数
   window.WebSocket = function (url, protocols) {
@@ -340,41 +340,44 @@
     // 为这个 WebSocket 实例添加 'message' 事件监听器
     ws.addEventListener("message", function (event) {
       const data = JSON.parse(event.data);
+      code = data.code;
       console.log("油猴脚本: 收到 WebSocket 消息:", data); // 可以用于调试
 
       if (data && data.code === 15) {
-        console.log(data.sel_userSex);
+        console.log(sel_userid); // 可以用于调试
+
+        if (data.sel_userSex === "女") {
+          setTimeout(() => {
+            $(`#userid_${data.sel_userid}`)
+              .find(".nickname")
+              .css("color", "red");
+          }, 1);
+        } else {
+          setTimeout(() => {
+            $(`#userid_${data.sel_userid}`)
+              .find(".nickname")
+              .css("color", "blue");
+          }, 1);
+        }
         if (
           (data.sel_userSex === "男" && genders.male) ||
           (data.sel_userSex === "女" && genders.female) ||
           (data.sel_userSex === "保密" && genders.unknown)
         ) {
-          warning_Black();
-          $(".layui-layer-btn0").click();
+          sendJson("warningreport", data.sel_userid, true);
         }
-        container.contentWindow.postMessage(
-          {
-            type: "F",
-            data: {
-              name: data.sel_userNikename,
-              gender: data.sel_userSex,
-              age: data.sel_userAge,
-              location: data.sel_userAddress,
-            },
-          },
-          "https://yrksed.vercel.app"
-        );
-        // console.log(
-        //   "油猴脚本: 通过 WebSocket 检测到用户匹配消息 (对应 code 15)！"
-        //   // data
+        // container.contentWindow.postMessage(
+        //   {
+        //     type: "F",
+        //     data: {
+        //       name: data.sel_userNikename,
+        //       gender: data.sel_userSex,
+        //       age: data.sel_userAge,
+        //       location: data.sel_userAddress,
+        //     },
+        //   },
+        //   "https://yrksed.vercel.app"
         // );
-        if (data.sel_userSex === "女") {
-          $(`#userid_${sel_userid}`).find(".nickname").css("color", "red");
-        }
-        // if (data.sel_userSex == "女") {
-        //  setTimeout(() => {
-        //   $(`#userid_${sel_userid}`).find(".nickname").css("color", "red");
-        //  }, 200);
       }
       // 您还可以检查 random_queue_get_random_getID 可能处理的特定数据结构，例如：
       // if (data && data.command === 'random_queue_get_random_getID') {
@@ -384,8 +387,26 @@
 
     return ws; // 返回修改后的 WebSocket 实例
   };
-
   console.log("油猴脚本: WebSocket 构造函数已成功覆盖。");
+
+  // $("a[id^='userid_']").each(function () {
+  //   console.log(this.id);
+  // });
+
+  // $("a[id^='userid_']").addEventListener("click", function (e) {
+  //   console.log("你点击了");
+  // });
+
+  // $("#user_list").addEventListener("click", function (e) {
+  //   const link = e.target.closest("a");
+  //   if (link && $("#user_list").contains("userlist")) {
+  //     e.preventDefault(); // 阻止 <a> 标签的默认跳转行为 (如果目标是 <a>)
+
+  //     console.log("你点击了链接：", link);
+  //     console.log("链接内容是：", link.textContent);
+  //     // 你可以执行别的逻辑
+  //   }
+  // });
 
   let intervalId = null;
   window.addEventListener(
@@ -403,9 +424,8 @@
             // console.log(event.data);
             // if (gender == "女") { //  container.contentWindow.postMessage( //   { name: name, age: age, location: location }, //   "https://nmchat.vercel.app" //  ); //  //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location); //  // console.log( //  //  "name: " + name + " | age: " + age + " | location: " + location //  // ); // }
             sendJson("random", "", true);
-            console.log(ws);
             // console.log(event.data);
-          }, 1000);
+          }, 1500);
         } else if (event.data.state === "STOP") {
           if (intervalId !== null) {
             clearInterval(intervalId);
@@ -568,6 +588,8 @@
 //   $("#health_mode").remove("checked");
 //  }
 // }
+
+// console.log(pri_BlackUserID); //私聊黑名单
 
 //曾经匹配过的列表
 //console.log(dic_userlist);

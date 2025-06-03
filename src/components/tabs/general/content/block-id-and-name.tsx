@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { ChevronsUpDown } from "lucide-react";
 
-export default function Block() {
+export default function BlockIDAndName() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [info, setInfo] = useState({

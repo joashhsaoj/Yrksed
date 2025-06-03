@@ -13,10 +13,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 import { ChevronsUpDown } from "lucide-react";
-
 import PauseWhenNotBlock from "./pause-when-not-block";
 import BlockGenders from "./block-genders";
 import DeleteUser from "./delete-user";
+import CopyLink from "./copy-link";
 
 type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
 
@@ -32,7 +32,6 @@ export default function Secondary() {
   });
 
   useEffect(() => {
-    console.log(gendersChecked);
     window.parent.postMessage(
       {
         genders: gendersChecked,
@@ -63,7 +62,10 @@ export default function Secondary() {
             setGendersChecked={setGendersChecked}
           />
           <Separator />
-          <DeleteUser />
+          <div className="flex justify-between">
+            <CopyLink />
+            <DeleteUser />
+          </div>
         </div>
       </CollapsibleContent>
     </Collapsible>
