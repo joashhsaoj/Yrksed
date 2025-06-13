@@ -8,19 +8,19 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
 
-export default function Mode() {
-  const [mode, setMode] = useLocalStorage("mode");
+export default function UserMode() {
+  const [userMode, setUserMode] = useLocalStorage("userMode");
 
   useEffect(() => {
-    window.parent.postMessage({ type: "userMode", data: mode }, "*");
-  }, [mode]);
+    window.parent.postMessage({ type: "userMode", data: userMode }, "*");
+  }, [userMode]);
 
   return (
     <div className="flex items-center justify-between">
       <RadioGroup
-        value={mode}
+        value={userMode}
         onValueChange={(newValue: string) => {
-          setMode(newValue);
+          setUserMode(newValue);
         }}
         className="grid grid-cols-3 gap-2"
       >

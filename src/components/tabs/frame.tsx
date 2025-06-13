@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import Mode from "./other/mode";
+import Mode from "./other/user-mode";
 import StartAndStop from "./general/footer/start-and-stop";
 import Secondary from "./general/head/secondary";
 import Main from "./general/content/main";

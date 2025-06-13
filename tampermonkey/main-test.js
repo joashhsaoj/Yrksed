@@ -373,7 +373,11 @@
       if (event.origin === "https://yrksed.vercel.app") {
         switch (event.data.type) {
           case "userMode":
-            localStorage.setItem("mode", event.data.data); // console.log(event.data);
+            const oldUserMode = localStorage.getItem("userMode");
+            localStorage.setItem("userMode", event.data.data); // console.log(event.data);
+            if (oldUserMode !== event.data.data) {
+              window.location.reload();
+            }
             break;
           case "gendersChecked":
             gendersChecked = event.data.data;
@@ -389,6 +393,8 @@
                 intervalId = null;
               }
             }
+            break;
+          case "copyLink":
             break;
         }
       }
