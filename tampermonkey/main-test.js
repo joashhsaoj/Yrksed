@@ -319,7 +319,7 @@
   // var dic_userlists = {};
 
   ws.close();
-  var genders;
+  var gendersChecked;
   const OriginalWebSocket = window.WebSocket;
   // 覆盖 WebSocket 构造函数
   window.WebSocket = function (url, protocols) {
@@ -353,9 +353,9 @@
           }, 1);
         }
         if (
-          (data.sel_userSex === "男" && genders.male) ||
-          (data.sel_userSex === "女" && genders.female) ||
-          (data.sel_userSex === "保密" && genders.unknown)
+          (data.sel_userSex === "男" && gendersChecked.male) ||
+          (data.sel_userSex === "女" && gendersChecked.female) ||
+          (data.sel_userSex === "保密" && gendersChecked.unknown)
         ) {
           sendJson("warningreport", data.sel_userid, true);
         }
@@ -371,22 +371,25 @@
     "message",
     (event) => {
       if (event.origin === "https://yrksed.vercel.app") {
-        if (event.data.type === "userMode") {
-          localStorage.setItem("mode", event.data.data); // console.log(event.data);
-        }
-        if (event.data.genders) {
-          genders = event.data.genders; // console.log(genders);
-        }
-        if (event.data.type === "state" && event.data.data === "START") {
-          intervalId = setInterval(() => {
-            // if (gender == "女") { //  container.contentWindow.postMessage( //   { name: name, age: age, location: location }, //   "https://nmchat.vercel.app" //  ); //  //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location); //  // console.log( //  //  "name: " + name + " | age: " + age + " | location: " + location //  // ); // }
-            sendJson("random", "", true);
-          }, 1500);
-        } else if (event.data.type === "state" && event.data.data === "STOP") {
-          if (intervalId !== null) {
-            clearInterval(intervalId);
-            intervalId = null;
-          }
+        switch (event.data.type) {
+          case "userMode":
+            localStorage.setItem("mode", event.data.data); // console.log(event.data);
+            break;
+          case "genderChecked":
+            gendersChecked = event.data.data;
+            break;
+          case "state":
+            if (event.data.data === "START") {
+              intervalId = setInterval(() => {
+                sendJson("random", "", true);
+              }, 1500);
+            } else if (event.data.data === "STOP") {
+              if (intervalId !== null) {
+                clearInterval(intervalId);
+                intervalId = null;
+              }
+            }
+            break;
         }
       }
     },

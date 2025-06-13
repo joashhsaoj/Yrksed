@@ -34,7 +34,8 @@ export default function Secondary() {
   useEffect(() => {
     window.parent.postMessage(
       {
-        genders: gendersChecked,
+        type: "gendersChecked",
+        data: gendersChecked,
       },
       "*"
     );

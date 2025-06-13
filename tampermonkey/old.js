@@ -23,23 +23,7 @@ window.haveTitleTips = (msg) => {
   }
 };
 
-document
-  .getElementById("user_list")
-  .addEventListener("click", function (event) {
-    container.contentWindow.postMessage(
-      {
-        type: "F",
-        data: {
-          name: event.target.textContent,
-          gender: event.target.textContent,
-          age: 1,
-          location: event.target.textContent,
-        },
-      },
-      "https://yrksed.vercel.app"
-    );
-    // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
-  });
+
 
 if ($.cookie("isMoon") !== 1) {
   $("#theme_sun_moon").click();
