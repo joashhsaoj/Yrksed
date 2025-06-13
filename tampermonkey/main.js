@@ -6,9 +6,7 @@
 // @author    Your Name
 // @match    http://v1.70os.top/*
 // @match    http://v1.chat1v1.cn/*
-
 // @match    http://*.chatbbq.cn/*
-
 // @match    http://v1.web1v1.cn/*
 // @match    http://v2.henbaidu.com/*
 // @match    http://v6.nm1v1.cn/*
@@ -18,7 +16,7 @@
 // ==/UserScript==
 
 (function () {
-  "use strict"; // 检查是否在 iframe 内部运行z
+  "use strict"; // 检查是否在 iframe 内部运行
 
   if (window.self !== window.top) {
     return; // 如果在 iframe 内部运行，则退出脚本
@@ -27,14 +25,12 @@
   const container = document.createElement("iframe");
   container.src = "https://yrksed.vercel.app";
   container.style.position = "fixed";
-  container.style.top = "0px";
-  container.style.right = "0px";
-  container.style.zIndex = "19991999";
+  container.style.top = "175px";
+  container.style.right = "-75px";
+  container.style.zIndex = "20000000";
   container.style.cursor = "move";
-  container.style.width = "400px";
-  container.style.height = "420px";
-  container.style.top = "300px";
-  container.style.right = "-350px";
+  container.style.width = "420px";
+  container.style.height = "400px";
   container.style.border = "5px solid black";
   container.style.overflow = "none"; //container.style.borderLeft = "10px solid black"; //container.style.borderBottom = "10px solid transparent"; //container.allow = "fullscreen; clipboard-read; clipboard-write";
   container.sandbox = "allow-scripts allow-same-origin allow-forms";
@@ -89,99 +85,83 @@
 
   document.body.appendChild(container);
 
-  const script = document.createElement("script");
-  script.textContent = `
-     $("#msg_tips").remove();
-     $("#theme_sun_moon").remove();
-     $("#colorpicker").remove();
+  $("#msg_tips").remove();
+  $("#theme_sun_moon").remove();
+  $("#colorpicker").remove(); //---------------------------------------------------
 
-     $.cookie("isMoon", 1, { expires: 365 });
-     $("#themeChange").attr("href", "/css/random-black.css?v=1");
-     $("body").css("background-color", "#414550");
-     $.cookie("colorpicker", "#414550", { expires: 365 });
+  $.cookie("isMoon", 1, { expires: 365 });
+  $("#themeChange").attr("href", "/css/random-black.css?v=1");
+  $("body").css("background-color", "#414550");
+  $.cookie("colorpicker", "#414550", { expires: 365 });
 
-     //$.cookie("isSound", -1, { expires: 365 });
-     //$("#msg_tips").attr("src", "/img/sys/sound_off.png");
+  $('img[alt="nmchat.cn 匿名聊"]').remove();
+  $("#AltInfo").remove();
 
-     $('img[alt="nmchat.cn 匿名聊"]').remove();
+  $(
+    'div[style="text-align: center; line-height: 18px; letter-spacing: 2px; margin: 5px; margin-top: 0px; "]'
+  ).remove();
+  $(
+    'div[style="text-align: center; line-height: 18px; letter-spacing: 1px; margin: 5px; color: #BBB; font-size: 12px;"]'
+  ).remove();
 
-     $("#AltInfo").remove();
+  $("#SlideSysInfos").remove();
+  $(".sysInfo").remove();
 
-     $(
-      'div[style="text-align: center; line-height: 18px; letter-spacing: 2px; margin: 5px; margin-top: 0px; "]'
-     ).remove();
+  $("#user_list").css("height", "90%");
+  $("#area_VIP_Close").remove();
+  $("#area_VIP_Close_btn").remove(); //---------------------------------------------------
 
-     $("#SlideSysInfos").remove();
-     $(
-      'div[style="text-align: center; line-height: 18px; letter-spacing: 1px; margin: 5px; color: #BBB; font-size: 12px;"]'
-     ).remove();
-     $(".sysInfo").remove();
-
-     //$("#user_count").remove(); //测试是否显示的好友变多
-     $("#user_list").css("height", "90%");
-
-     $("#manageUser_DelAll").remove()
-
-     $("#area_VIP_Close").remove();
-     $("#area_VIP_Close_btn").remove();
-
-     function haveTitleTips(msg) {
-      if (msg != "已匹配") {
-       if (!isFocus && !tick_titletips) {
-        //haveSoundTips();
-        tick_titletips = setInterval(function () {
-         if (document.title.indexOf(msg) == -1) {
-          document.title = "[" + msg + "]-匿名聊";
-         } else {
-          document.title = "[deskry]-匿名聊";
-         }
-         if (isFocus) {
-          clearInterval(tick_titletips);
-          tick_titletips = null;
-          document.title = "匿名聊";
-         }
+  window.haveTitleTips = (msg) => {
+    if (msg == "新私信") {
+      if (!isFocus && !tick_titletips) {
+        tick_titletips = setInterval(() => {
+          if (document.title.indexOf(msg) == -1) {
+            document.title = "[" + msg + "]-匿名聊";
+          } else {
+            document.title = "[deskry]-匿名聊";
+          }
+          if (isFocus) {
+            clearInterval(tick_titletips);
+            tick_titletips = null;
+            document.title = "匿名聊";
+          }
         }, 500);
-       } else if (!isFocus) {
-        //haveSoundTips();
-       }
-
-       haveSoundTips();
       }
-     }
-
-         `;
-  script.onload = () => {
-    console.log("脚本加载成功");
+      haveSoundTips();
+    }
   };
-  script.onerror = () => {
-    console.error("脚本加载失败");
-  };
-  document.head.appendChild(script);
 
   const mode_default = {
-    "v1.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "网调瘦弱骚b母🐶m"],
+    "v1.web1v1.cn": ["08657a5149a948cfadada6e4443df049", "网调瘦弱骚b母🐶m"],
+    // "v1.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "网调瘦弱骚b母🐶m"],
 
-    "v2.chatbbq.cn": ["afcf520e69a44d59a26cf4bfe8e69fe0", "爱黑逼大陰唇大奶頭"],
+    // "v2.chatbbq.cn": ["afcf520e69a44d59a26cf4bfe8e69fe0", "爱黑逼大陰唇大奶頭"],
+    // "v20.chatbbq.cn": [
+    //   "afcf520e69a44d59a26cf4bfe8e69fe0",
+    //   "爱黑逼大陰唇大奶頭",
+    // ],
+    "v2.chatbbq.cn": ["26305d8416b64f7c92c4b3b5a5c97943", "爱黑逼大陰唇大奶頭"],
     "v20.chatbbq.cn": [
-      "afcf520e69a44d59a26cf4bfe8e69fe0",
+      "26305d8416b64f7c92c4b3b5a5c97943",
       "爱黑逼大陰唇大奶頭",
     ],
 
     "v3.chatbbq.cn": [
-      "4db5c82fe67444fc80e391a7e03be901",
-      "喜瘦苗条小奶贫乳骚b",
+      "94b3b7cafcca4f359565a83bc936a0fb",
+      "主动发露点照才算搔b",
     ],
     "v30.chatbbq.cn": [
+      "d778bb9a097a4836a773bb0a41295b9b",
+      "主动发露点照才算搔b",
+    ],
+
+    "v4.chatbbq.cn": [
       "4db5c82fe67444fc80e391a7e03be901",
       "喜瘦苗条小奶贫乳骚b",
     ],
-    "v4.chatbbq.cn": [
-      "d778bb9a097a4836a773bb0a41295b9b",
-      "主动发露点照才算搔b",
-    ],
     "v40.chatbbq.cn": [
-      "d778bb9a097a4836a773bb0a41295b9b",
-      "主动发露点照才算搔b",
+      "4db5c82fe67444fc80e391a7e03be901",
+      "喜瘦苗条小奶贫乳骚b",
     ],
 
     "v5.chatbbq.cn": ["a9308ef533c94cbe83ecebb917dbf54c", "骚b学生女m自觉发照"],
@@ -191,10 +171,10 @@
     ],
 
     "v6.chatbbq.cn": [
-      "08657a5149a948cfadada6e4443df049",
+      "d2119b8768f24906bf0b9f19fa90becd",
       "看原相机拍的奶子骚b",
     ],
-    "v60.chatbbq.cn": ["08657a5149a948cfadada6e4443df049", "爱黑b大陰唇大奶頭"],
+    "v60.chatbbq.cn": ["d2119b8768f24906bf0b9f19fa90becd", "爱黑b大陰唇大奶頭"],
 
     "v7.chatbbq.cn": [
       "26305d8416b64f7c92c4b3b5a5c97943",
@@ -297,121 +277,111 @@
     ],
   };
 
-  $('.layui-unselect layui-form-switch:contains("男")').trigger("click");
+  const mode = localStorage.getItem("mode");
 
-  if (localStorage.getItem("mode") === "default") {
-    var [ID, USERNAME] = mode_default[window.location.hostname] || [
-      "default",
-      "0",
-    ];
-    if ($.cookie("user_id") != ID) {
-      // else if (localStorage.getItem("mode") === "origin") { //  $("#btn_xf").click(); //  $(".layui-layer-btn0").click(); // }
+  const modeMap = {
+    default: mode_default,
+    zhegou: mode_zhegou,
+    maren: mode_maren,
+  };
+
+  if (mode && modeMap[mode]) {
+    var [ID, USERNAME] = modeMap[mode][window.location.hostname] || ["", ""];
+
+    if (
+      $.cookie("user_id") !== ID ||
+      $.cookie("user_nickname_random") != USERNAME ||
+      $.cookie("userSex") !== "男"
+    ) {
       $.cookie("user_id", ID, { expires: 365 });
-      window.location.reload();
-    }
-  } else if (localStorage.getItem("mode") === "zhegou") {
-    var [ID, USERNAME] = mode_zhegou[window.location.hostname] || [
-      "default",
-      "0",
-    ];
-    if ($.cookie("user_id") != ID) {
-      // else if (localStorage.getItem("mode") === "origin") { //  $("#btn_xf").click(); //  $(".layui-layer-btn0").click(); // }
-      $.cookie("user_id", ID, { expires: 365 });
-      window.location.reload();
-    }
-  } else if (localStorage.getItem("mode") === "maren") {
-    var [ID, USERNAME] = mode_maren[window.location.hostname] || [
-      "default",
-      "0",
-    ];
-    if ($.cookie("user_id") != ID) {
-      // else if (localStorage.getItem("mode") === "origin") { //  $("#btn_xf").click(); //  $(".layui-layer-btn0").click(); // }
-      $.cookie("user_id", ID, { expires: 365 });
+      $.cookie("user_nickname_random", USERNAME, { expires: 365 });
+      $.cookie("userSex", "男", { expires: 365 });
       window.location.reload();
     }
   }
 
-  if (
-    $("#inp_nickname_other").val() != USERNAME ||
-    $.cookie("userSex") != "男"
-  ) {
-    (function () {
-      let checkSendJson = setInterval(function () {
-        if (typeof sendJson === "function") {
-          clearInterval(checkSendJson);
-          sendJson("chgname", USERNAME, true);
-          $('.layui-form-radio:contains("男")').trigger("click"); // location.reload();
-        }
-      }, 500); // 每 500ms 检测一次
-    })();
-  } // window.addEventListener("load", function () { //  console.log("页面已完全加载"); //  sendJson("chgname", "666", true); // });
-
-  let intervalId = null;
-  let genders;
-
-  var dic_userlists = {};
-
-  var originalOnMessage = ws.onmessage;
-
-  ws.onmessage = function (e) {
-    console.log(111);
-    if (originalOnMessage) {
-      originalOnMessage(e);
-    }
-    var json = $.parseJSON(e.data);
-    //如果匹配太久点击取消匹配再点击匹配按钮
-    console.log(222);
-    // console.log(e.data);
-    console.log(json);
-    if (json.code == 15) {
-      //外层判断可以去掉
+  document
+    .getElementById("user_list")
+    .addEventListener("click", function (event) {
       container.contentWindow.postMessage(
         {
-          type: "F",
+          type: "currentUser",
           data: {
-            name: json.sel_userNikename,
-            gender: json.sel_userSex,
-            age: json.sel_userAge,
-            location: json.sel_userAddress,
+            id: sel_userid,
+            name: event.target.textContent,
           },
         },
         "https://yrksed.vercel.app"
       );
+      // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
+    });
 
-      // console.log(typeof json.sel_userNikename);
-      // console.log(typeof json.sel_userSex);
-      // console.log(typeof Number(json.sel_userAge));
-      // console.log(typeof json.sel_userAddress);
+  // var dic_userlists = {};
 
+  ws.close();
+  var genders;
+  const OriginalWebSocket = window.WebSocket;
+  // 覆盖 WebSocket 构造函数
+  window.WebSocket = function (url, protocols) {
+    console.log("油猴脚本: 正在创建新的 WebSocket 连接:", url);
 
-      if (data.sel_userSex == "男" || json.sel_userSex == "保密") {
-        warning_Black();
-        $(".layui-layer-btn0").click();
-        $(`#userid_${sel_userid}`).remove();
+    const ws = new OriginalWebSocket(url, protocols); // 创建原始的 WebSocket 实例
+
+    var code;
+
+    // 为这个 WebSocket 实例添加 'message' 事件监听器
+    ws.addEventListener("message", function (event) {
+      const data = JSON.parse(event.data);
+      code = data.code;
+      console.log("油猴脚本: 收到 WebSocket 消息:", data); // 可以用于调试
+
+      if (data && data.code === 15) {
+        console.log(sel_userid); // 可以用于调试
+
+        if (data.sel_userSex === "女") {
+          setTimeout(() => {
+            $(`#userid_${data.sel_userid}`)
+              .find(".nickname")
+              .css("color", "red");
+          }, 1);
+        } else {
+          setTimeout(() => {
+            // $(`#userid_${data.sel_userid}`)
+            //   .find(".nickname")
+            //   .css("color", "blue");
+            $(`#userid_${data.sel_userid}`).remove();
+          }, 1);
+        }
+        if (
+          (data.sel_userSex === "男" && genders.male) ||
+          (data.sel_userSex === "女" && genders.female) ||
+          (data.sel_userSex === "保密" && genders.unknown)
+        ) {
+          sendJson("warningreport", data.sel_userid, true);
+        }
       }
-      if (pb.includes(sel_userid)) {
-        warning_Black();
-        $(".layui-layer-btn0").click();
-      }
-    }
+    });
+
+    return ws; // 返回修改后的 WebSocket 实例
   };
+  console.log("油猴脚本: WebSocket 构造函数已成功覆盖。");
 
+  let intervalId = null;
   window.addEventListener(
     "message",
     (event) => {
       if (event.origin === "https://yrksed.vercel.app") {
         if (event.data.mode) {
-          localStorage.setItem("mode", event.data.mode);
+          localStorage.setItem("mode", event.data.mode); // console.log(event.data);
         }
-
+        if (event.data.genders) {
+          genders = event.data.genders; // console.log(genders);
+        }
         if (event.data.state === "START") {
           intervalId = setInterval(() => {
-            // console.log(event.data);
             // if (gender == "女") { //  container.contentWindow.postMessage( //   { name: name, age: age, location: location }, //   "https://nmchat.vercel.app" //  ); //  //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location); //  // console.log( //  //  "name: " + name + " | age: " + age + " | location: " + location //  // ); // }
             sendJson("random", "", true);
-            console.log(ws);
-            // console.log(event.data);
-          }, 1000);
+          }, 1500);
         } else if (event.data.state === "STOP") {
           if (intervalId !== null) {
             clearInterval(intervalId);
@@ -425,21 +395,6 @@
 })();
 
 //test
-
-// var originalOnMessage = ws.onmessage;
-// var data;
-
-// ws.onmessage = function (e) {
-//  if (originalOnMessage) {
-//   originalOnMessage(e);
-//  }
-//  data = $.parseJSON(e.data);
-//  // console.log(data);
-// };
-// sendJson("random", "", true);
-// if (data.code == 15) {
-//  console.log(data);
-// }
 
 // //$("#ButtonRandom").click()
 // //$("#btn_random").click();
@@ -456,10 +411,6 @@
 // //
 // $.cookie("switchvipsex", switchvipsex, { expires: 365 });
 // $.cookie("switchVipAddress", switchVipAddress, { expires: 365 });
-
-//获取当前的用户id
-// sendJson("random", "", true);
-// console.log(sel_userid);
 
 //注销
 // $("#btn_xf").click();
@@ -483,7 +434,9 @@
 //case 8: fun_getprivmsg(json); break;//获取私信内容
 
 //当前点击的用户的找回id
-//console.log(sel_userid);
+// console.log(sel_userid);
+// console.log(dic_userlist[sel_userid]);
+// console.log($(`#userid_${sel_userid}`));
 
 /*
       function fun_userchgsexaddress() {
@@ -517,10 +470,6 @@
       console.log($.cookie("userSex"));
       */
 
-// if ($.cookie("userSex") != "男") {
-//  $('.layui-form-radio:contains("男")').trigger("click");
-// }
-
 // switchvipsex = "1";
 // console.log(switchvipsex);
 // console.log($.cookie("switchvipsex"));
@@ -537,12 +486,6 @@
 // $.cookie("randomVipCode");
 // document.cookie =
 //  "randomVipCode=vipali6458eb4edee1265071526072; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-
-// console.log(sel_userid);
-// console.log(dic_userlist[sel_userid]);
-
-// let a = "?1aab8a71ebdd5b015f1a3d2dcd3c4d5b";
-// console.log($(`#userid_${sel_userid}`));
 
 // setTimeout(() => {
 //  $(`#userid_${sel_userid}`)
@@ -601,12 +544,8 @@
 //   $("#health_mode").remove("checked");
 //  }
 // }
-// var pb = [
-//  "8857944f9d9ff0950d999f9b424307e8",
-//  "ffbf48a13f92f392ade4e5f2fd5c45fd",
-//  "1798cae3a03ace75edad8de4de33b176",
-//  "4f3935792e322cc985eb672a8febd250",
-// ];
+
+// console.log(pri_BlackUserID); //私聊黑名单
 
 //曾经匹配过的列表
 //console.log(dic_userlist);

@@ -375,15 +375,15 @@
           case "userMode":
             localStorage.setItem("mode", event.data.data); // console.log(event.data);
             break;
-          case "genderChecked":
+          case "gendersChecked":
             gendersChecked = event.data.data;
             break;
           case "state":
-            if (event.data.data === "START") {
+            if (event.data.data) {
               intervalId = setInterval(() => {
                 sendJson("random", "", true);
               }, 1500);
-            } else if (event.data.data === "STOP") {
+            } else {
               if (intervalId !== null) {
                 clearInterval(intervalId);
                 intervalId = null;
