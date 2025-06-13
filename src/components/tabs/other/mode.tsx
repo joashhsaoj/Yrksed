@@ -12,7 +12,7 @@ export default function Mode() {
   const [mode, setMode] = useLocalStorage("mode");
 
   useEffect(() => {
-    window.parent.postMessage({ mode: mode }, "*");
+    window.parent.postMessage({ type: "userMode", data: mode }, "*");
   }, [mode]);
 
   return (

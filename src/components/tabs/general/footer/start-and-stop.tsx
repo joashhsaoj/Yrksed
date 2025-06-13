@@ -9,7 +9,10 @@ export default function StartAndStop() {
   const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
-    window.parent.postMessage({ state: isStarted ? "START" : "STOP" }, "*");
+    window.parent.postMessage(
+      { type: "state", data: isStarted ? "START" : "STOP" },
+      "*"
+    );
   }, [isStarted]);
 
   return (

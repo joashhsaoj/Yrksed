@@ -15,17 +15,13 @@ import { ChevronsUpDown } from "lucide-react";
 
 export default function BlockIDAndName() {
   const [isOpen, setIsOpen] = useState(false);
+  // const [mode, setMode] = useState("m0");
 
-  const [info, setInfo] = useState({
-    name: "",
-    gender: "",
-    age: null,
-    location: "",
-  });
+  const [info, setInfo] = useState({ id: "", name: "" });
 
   useEffect(() => {
     window.addEventListener("message", (event) => {
-      if (event.data.type === "F") {
+      if (event.data.type === "currentUser") {
         setInfo(event.data.data);
       }
     });
@@ -48,16 +44,16 @@ export default function BlockIDAndName() {
       </div>
       <CollapsibleContent className="space-y-2">
         <div className="flex items-center justify-between">
-          <RadioGroup defaultValue="default" className="grid grid-cols-2 gap-2">
+          <RadioGroup defaultValue="m0" className="grid grid-cols-2 gap-2">
             {[
-              { value: "default", id: "no", label: "Default" },
-              { value: "id", id: "m1", label: "ID" },
-              { value: "name", id: "m2", label: "Name" },
-              { value: "id + name", id: "m3", label: "ID + Name" },
+              { mode: "m0", label: "Default" },
+              { mode: "m1", label: "ID" },
+              { mode: "m2", label: "Name" },
+              { mode: "m3", label: "ID + Name" },
             ].map((option) => (
-              <div key={option.id} className="flex items-center space-x-2">
-                <RadioGroupItem value={option.value} id={option.id} />
-                <Label htmlFor={option.id}>{option.label}</Label>
+              <div key={option.mode} className="flex items-center space-x-2">
+                <RadioGroupItem value={option.mode} id={option.mode} />
+                <Label htmlFor={option.mode}>{option.label}</Label>
               </div>
             ))}
           </RadioGroup>

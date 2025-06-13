@@ -63,8 +63,10 @@ export default function Secondary() {
           />
           <Separator />
           <div className="flex justify-between">
-            <CopyLink />
-            <DeleteUser />
+            <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
+              <CopyLink />
+              <DeleteUser />
+            </div>
           </div>
         </div>
       </CollapsibleContent>

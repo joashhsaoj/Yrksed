@@ -371,18 +371,18 @@
     "message",
     (event) => {
       if (event.origin === "https://yrksed.vercel.app") {
-        if (event.data.type === "userMode") {
-          localStorage.setItem("mode", event.data.data); // console.log(event.data);
+        if (event.data.mode) {
+          localStorage.setItem("mode", event.data.mode); // console.log(event.data);
         }
         if (event.data.genders) {
           genders = event.data.genders; // console.log(genders);
         }
-        if (event.data.type === "state" && event.data.data === "START") {
+        if (event.data.state === "START") {
           intervalId = setInterval(() => {
             // if (gender == "女") { //  container.contentWindow.postMessage( //   { name: name, age: age, location: location }, //   "https://nmchat.vercel.app" //  ); //  //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location); //  // console.log( //  //  "name: " + name + " | age: " + age + " | location: " + location //  // ); // }
             sendJson("random", "", true);
           }, 1500);
-        } else if (event.data.type === "state" && event.data.data === "STOP") {
+        } else if (event.data.state === "STOP") {
           if (intervalId !== null) {
             clearInterval(intervalId);
             intervalId = null;

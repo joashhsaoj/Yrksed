@@ -1,3 +1,54 @@
+$(".title-center-roomcmd").remove();
+$("#msg_tips").remove();
+$("#theme_sun_moon").remove();
+$("#colorpicker").remove();
+
+window.haveTitleTips = (msg) => {
+  if (msg == "新私信") {
+    if (!isFocus && !tick_titletips) {
+      tick_titletips = setInterval(() => {
+        if (document.title.indexOf(msg) == -1) {
+          document.title = "[" + msg + "]-匿名聊";
+        } else {
+          document.title = "[deskry]-匿名聊";
+        }
+        if (isFocus) {
+          clearInterval(tick_titletips);
+          tick_titletips = null;
+          document.title = "匿名聊";
+        }
+      }, 500);
+    }
+    haveSoundTips();
+  }
+};
+
+document
+  .getElementById("user_list")
+  .addEventListener("click", function (event) {
+    container.contentWindow.postMessage(
+      {
+        type: "F",
+        data: {
+          name: event.target.textContent,
+          gender: event.target.textContent,
+          age: 1,
+          location: event.target.textContent,
+        },
+      },
+      "https://yrksed.vercel.app"
+    );
+    // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
+  });
+
+if ($.cookie("isMoon") !== 1) {
+  $("#theme_sun_moon").click();
+}
+// $("#manageUser_DelAll").remove();
+$("#manageUser_DelAll").addEventListener("click", function (event) {
+  console.log("删除所有用户");
+});
+
 // else if (localStorage.getItem("mode") === "origin") { //  $("#btn_xf").click(); //  $(".layui-layer-btn0").click(); // }
 
 // var originalOnMessage = ws.onmessage;
