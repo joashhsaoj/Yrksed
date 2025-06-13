@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import Mode from "./other/user-mode";
+import Main from "./general/content/main";
 import StartAndStop from "./general/footer/start-and-stop";
 import Secondary from "./general/head/secondary";
-import Main from "./general/content/main";
+import UserMode from "./other/user-mode";
 
 export default function Frame() {
   return (
@@ -65,7 +65,7 @@ export default function Frame() {
         <Card>
           <CardHeader>
             <CardTitle>
-              <Mode />
+              <UserMode />
             </CardTitle>
             <CardDescription>
               <div className="flex items-center space-x-2">

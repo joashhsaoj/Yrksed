@@ -277,16 +277,16 @@
     ],
   };
 
-  const mode = localStorage.getItem("mode");
+  const userMode = localStorage.getItem("userMode");
 
-  const modeMap = {
+  const userModeMap = {
     default: mode_default,
     zhegou: mode_zhegou,
     maren: mode_maren,
   };
 
-  if (mode && modeMap[mode]) {
-    var [ID, USERNAME] = modeMap[mode][window.location.hostname] || ["", ""];
+  if (userMode && userModeMap[userMode]) {
+    var [ID, USERNAME] = userModeMap[userMode][window.location.hostname] || ["", ""];
 
     if (
       $.cookie("user_id") !== ID ||
