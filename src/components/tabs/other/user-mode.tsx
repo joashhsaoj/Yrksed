@@ -25,16 +25,16 @@ export default function UserMode() {
         className="grid grid-cols-3 gap-2"
       >
         {[
-          { userMode: "m1", label: "Default" },
-          { userMode: "m2", label: "ZheGou" },
-          { userMode: "m3", label: "MaRen" },
-          { userMode: "m4", label: "WangTu" },
-          { userMode: "m5", label: "Other" },
-          { userMode: "m0", label: "Origin" },
+          { value: "default", label: "Default" },
+          { value: "zhegou", label: "ZheGou" },
+          { value: "maren", label: "MaRen" },
+          { value: "wangtu", label: "WangTu" },
+          { value: "other", label: "Other" },
+          { value: "origin", label: "Origin" },
         ].map((option) => (
-          <div key={option.userMode} className="flex items-center space-x-2">
-            <RadioGroupItem value={option.userMode} id={option.userMode} />
-            <Label htmlFor={option.userMode}>{option.label}</Label>
+          <div key={option.value} className="flex items-center space-x-2">
+            <RadioGroupItem value={option.value} id={option.value} />
+            <Label htmlFor={option.value}>{option.label}</Label>
           </div>
         ))}
       </RadioGroup>
