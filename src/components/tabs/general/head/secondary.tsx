@@ -21,14 +21,14 @@ import CopyLink from "./copy-link";
 type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
 
 export default function Secondary() {
-  const [mode] = useLocalStorage("mode");
+  const [userMode] = useLocalStorage("userMode");
 
   const [isOpen, setIsOpen] = useState(false);
 
   const [gendersChecked, setGendersChecked] = useState<GendersChecked>({
-    male: mode !== "origin",
-    female: !["default", "origin"].includes(mode),
-    unknown: mode !== "origin",
+    male: userMode !== "origin",
+    female: !["default", "origin"].includes(userMode),
+    unknown: userMode !== "origin",
   });
 
   useEffect(() => {

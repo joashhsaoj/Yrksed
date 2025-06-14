@@ -143,39 +143,24 @@
     //   "爱黑逼大陰唇大奶頭",
     // ],
     "v2.web1v1.cn": ["26305d8416b64f7c92c4b3b5a5c97943", "爱黑逼大陰唇大奶頭"],
-    "v20.web1v1.cn": [
-      "26305d8416b64f7c92c4b3b5a5c97943",
-      "爱黑逼大陰唇大奶頭",
-    ],
+    "v20.web1v1.cn": ["26305d8416b64f7c92c4b3b5a5c97943", "爱黑逼大陰唇大奶頭"],
 
-    "v3.web1v1.cn": [
-      "94b3b7cafcca4f359565a83bc936a0fb",
-      "主动发露点照才算搔b",
-    ],
+    "v3.web1v1.cn": ["94b3b7cafcca4f359565a83bc936a0fb", "主动发露点照才算搔b"],
     "v30.web1v1.cn": [
       "d778bb9a097a4836a773bb0a41295b9b",
       "主动发露点照才算搔b",
     ],
 
-    "v4.web1v1.cn": [
-      "4db5c82fe67444fc80e391a7e03be901",
-      "喜瘦苗条小奶贫乳骚b",
-    ],
+    "v4.web1v1.cn": ["4db5c82fe67444fc80e391a7e03be901", "喜瘦苗条小奶贫乳骚b"],
     "v40.web1v1.cn": [
       "4db5c82fe67444fc80e391a7e03be901",
       "喜瘦苗条小奶贫乳骚b",
     ],
 
     "v5.web1v1.cn": ["a9308ef533c94cbe83ecebb917dbf54c", "骚b学生女m自觉发照"],
-    "v50.web1v1.cn": [
-      "a9308ef533c94cbe83ecebb917dbf54c",
-      "骚b学生女m自觉发照",
-    ],
+    "v50.web1v1.cn": ["a9308ef533c94cbe83ecebb917dbf54c", "骚b学生女m自觉发照"],
 
-    "v6.web1v1.cn": [
-      "d2119b8768f24906bf0b9f19fa90becd",
-      "看原相机拍的奶子骚b",
-    ],
+    "v6.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "看原相机拍的奶子骚b"],
     "v60.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "爱黑b大陰唇大奶頭"],
 
     "v7.web1v1.cn": [
@@ -196,10 +181,7 @@
       "贫乳小胸飞机场收留处",
     ],
 
-    "v9.web1v1.cn": [
-      "410120c844d04205a2aa2d2b55e70299",
-      "开发驯化返图贱b母畜",
-    ],
+    "v9.web1v1.cn": ["410120c844d04205a2aa2d2b55e70299", "开发驯化返图贱b母畜"],
 
     "v111.web1v1.cn": [
       "67a1309666a6499882a025a5a79a17a3",
@@ -210,10 +192,7 @@
   };
   const mode_zhegou = {
     "v1.web1v1.cn": ["dd68e3fa6fea4f9eaaa499583feaa123", "泥头车撞飞浙狗双亲"],
-    "v2.web1v1.cn": [
-      "68905fb5d3164bbdbfd5bb9111eb88b8",
-      "肆意屠刹浙狗全+乐色",
-    ],
+    "v2.web1v1.cn": ["68905fb5d3164bbdbfd5bb9111eb88b8", "肆意屠刹浙狗全+乐色"],
     "v20.web1v1.cn": [
       "68905fb5d3164bbdbfd5bb9111eb88b8",
       "肆意屠刹浙狗全+乐色",
@@ -226,10 +205,7 @@
       "a861b901e8343872ce3bef3f072c23b7",
       "浙狗亲馬输卵管注水银",
     ],
-    "v4.web1v1.cn": [
-      "693181aa030d73df815f0530a3fabbb4",
-      "浙狗亲嗎村里麦b被抓",
-    ],
+    "v4.web1v1.cn": ["693181aa030d73df815f0530a3fabbb4", "浙狗亲嗎村里麦b被抓"],
     "v40.web1v1.cn": [
       "693181aa030d73df815f0530a3fabbb4",
       "浙狗亲嗎村里麦b被抓",
@@ -386,6 +362,11 @@
             if (oldUserMode !== event.data.data) {
               window.location.reload();
             }
+            // const oldUserMode = localStorage.getItem("userMode");
+            // if (localStorage.getItem("userMode") !== event.data.data) {
+            //   window.location.reload();
+            // }
+            // localStorage.setItem("userMode", event.data.data); // console.log(event.data);
             break;
           case "gendersChecked":
             gendersChecked = event.data.data;
