@@ -20,7 +20,7 @@ export default function CopyLink() {
       variant="outline"
       onClick={() => {
         copyLink(
-          `http://v1.chatbbq.cn/randomdeskrynew.html?touserid=${info.id}&tousername=${info.name}`
+          `http://v1.web1v1.cn/randomdeskrynew.html?touserid=${info.id}&tousername=${info.name}`
         );
       }}
       onDoubleClick={() => {
