@@ -131,9 +131,11 @@
     }
   };
 
+  const userMode = localStorage.getItem("userMode") ?? "default";
+
   const mode_default = {
-    "v1.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "网调瘦弱骚b母🐶m"],
-    "v10.web1v1.cn": ["08657a5149a948cfadada6e4443df049", "网调瘦弱骚b母🐶m"],
+    // "v1.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "网调瘦弱骚b母🐶m"],
+    // "v10.web1v1.cn": ["08657a5149a948cfadada6e4443df049", "网调瘦弱骚b母🐶m"],
 
     "v1.web1v1.cn": ["08657a5149a948cfadada6e4443df049", "网调瘦弱骚b母🐶m"],
 
@@ -142,7 +144,7 @@
     //   "afcf520e69a44d59a26cf4bfe8e69fe0",
     //   "爱黑逼大陰唇大奶頭",
     // ],
-    "v2.web1v1.cn": ["26305d8416b64f7c92c4b3b5a5c97943", "爱黑逼大陰唇大奶頭"],
+    "v2.web1v1.cn": ["d2119b8768f24906bf0b9f19fa90becd", "爱黑逼大陰唇大奶頭"],
     "v20.web1v1.cn": ["26305d8416b64f7c92c4b3b5a5c97943", "爱黑逼大陰唇大奶頭"],
 
     "v3.web1v1.cn": ["94b3b7cafcca4f359565a83bc936a0fb", "主动发露点照才算搔b"],
@@ -258,31 +260,37 @@
     ],
   };
 
-  const userMode = localStorage.getItem("userMode");
-
   const userModeMap = {
     default: mode_default,
     zhegou: mode_zhegou,
     maren: mode_maren,
-  };
+  }; //
 
-  if (userMode && userModeMap[userMode]) {
-    var [ID, USERNAME] = userModeMap[userMode][window.location.hostname] || [
-      "",
-      "",
-    ];
+  // if (userMode && userModeMap[userMode]) {
+  var [ID, USERNAME] = userModeMap[userMode]?.[window.location.hostname] ?? [
+    "",
+    "",
+  ];
+  console.log(
+    `油猴脚本: 当前用户模式: ${userMode}, ID: ${ID}, 用户名: ${USERNAME}`
+  );
 
-    if (
-      $.cookie("user_id") !== ID ||
-      $.cookie("user_nickname_random") != USERNAME ||
-      $.cookie("userSex") !== "男"
-    ) {
-      $.cookie("user_id", ID, { expires: 365 });
-      $.cookie("user_nickname_random", USERNAME, { expires: 365 });
-      $.cookie("userSex", "男", { expires: 365 });
-      window.location.reload();
-    }
+  if (
+    $.cookie("user_id") !== ID ||
+    $.cookie("user_nickname_random") != USERNAME ||
+    $.cookie("userSex") !== "男"
+  ) {
+    $.cookie("user_id", ID, { expires: 365 }); // $.cookie("user_id", "", { expires: 365 });
+    $.cookie("user_nickname_random", USERNAME, { expires: 365 }); // $.cookie("user_nickname_random", "", { expires: 365 });
+    $.cookie("userSex", "男", { expires: 365 });
+    window.location.reload();
   }
+  // }
+  //  else {
+  //   $.cookie("user_id", null, { expires: -1 });
+  //   $.cookie("user_nickname_random", null, { expires: -1 });
+  //   window.location.reload();
+  // }
 
   document
     .getElementById("user_list")
@@ -303,6 +311,9 @@
   // var dic_userlists = {};
 
   ws.close();
+
+  var code;
+
   var gendersChecked;
   const OriginalWebSocket = window.WebSocket;
   // 覆盖 WebSocket 构造函数
@@ -310,9 +321,6 @@
     console.log("油猴脚本: 正在创建新的 WebSocket 连接:", url);
 
     const ws = new OriginalWebSocket(url, protocols); // 创建原始的 WebSocket 实例
-
-    var code;
-
     // 为这个 WebSocket 实例添加 'message' 事件监听器
     ws.addEventListener("message", function (event) {
       const data = JSON.parse(event.data);
@@ -320,8 +328,6 @@
       console.log("油猴脚本: 收到 WebSocket 消息:", data); // 可以用于调试
 
       if (data && data.code === 15) {
-        console.log(sel_userid); // 可以用于调试
-
         if (data.sel_userSex === "女") {
           setTimeout(() => {
             $(`#userid_${data.sel_userid}`)
@@ -330,10 +336,7 @@
           }, 1);
         } else {
           setTimeout(() => {
-            // $(`#userid_${data.sel_userid}`)
-            //   .find(".nickname")
-            //   .css("color", "blue");
-            $(`#userid_${data.sel_userid}`).remove();
+            $(`#userid_${data.sel_userid}`).remove(); // $(`#userid_${data.sel_userid}`).find(".nickname").css("color", "blue");
           }, 1);
         }
         if (
@@ -357,16 +360,15 @@
       if (event.origin === "https://yrksed.vercel.app") {
         switch (event.data.type) {
           case "userMode":
-            const oldUserMode = localStorage.getItem("userMode");
-            localStorage.setItem("userMode", event.data.data); // console.log(event.data);
-            if (oldUserMode !== event.data.data) {
-              window.location.reload();
-            }
             // const oldUserMode = localStorage.getItem("userMode");
-            // if (localStorage.getItem("userMode") !== event.data.data) {
+            // if (oldUserMode !== event.data.data) {
+            //   localStorage.setItem("userMode", event.data.data); // console.log(event.data);
             //   window.location.reload();
             // }
-            // localStorage.setItem("userMode", event.data.data); // console.log(event.data);
+            if (localStorage.getItem("userMode") !== event.data.data) {
+              window.location.reload();
+            }
+            localStorage.setItem("userMode", event.data.data); // console.log(event.data);
             break;
           case "gendersChecked":
             gendersChecked = event.data.data;
@@ -383,8 +385,8 @@
               }
             }
             break;
-          // case "copyLink":
-          //   break;
+          case "copyLink":
+            break;
         }
       }
     },
@@ -392,12 +394,13 @@
   );
 })();
 
+/*
 //test
 
 // //$("#ButtonRandom").click()
 // //$("#btn_random").click();
 // sendJson("random", "", true);
-// console.log(selUserInfo); //无用
+// console.log(selUserInfo); //匹配的用户信息
 
 // ws.send(
 //  JSON.stringify({ act: "random", id: $.cookie("user_id"), userAge: userAge })
@@ -546,4 +549,4 @@
 // console.log(pri_BlackUserID); //私聊黑名单
 
 //曾经匹配过的列表
-//console.log(dic_userlist);
+//console.log(dic_userlist);*/

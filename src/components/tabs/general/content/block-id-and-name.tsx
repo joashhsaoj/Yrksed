@@ -46,14 +46,14 @@ export default function BlockIDAndName() {
         <div className="flex items-center justify-between">
           <RadioGroup defaultValue="m0" className="grid grid-cols-2 gap-2">
             {[
-              { mode: "m0", label: "Default" },
-              { mode: "m1", label: "ID" },
-              { mode: "m2", label: "Name" },
-              { mode: "m3", label: "ID + Name" },
+              { blockMode: "m0", label: "Default" },
+              { blockMode: "m1", label: "ID" },
+              { blockMode: "m2", label: "Name" },
+              { blockMode: "m3", label: "ID + Name" },
             ].map((option) => (
-              <div key={option.mode} className="flex items-center space-x-2">
-                <RadioGroupItem value={option.mode} id={option.mode} />
-                <Label htmlFor={option.mode}>{option.label}</Label>
+              <div key={option.blockMode} className="flex items-center space-x-2">
+                <RadioGroupItem value={option.blockMode} id={option.blockMode} />
+                <Label htmlFor={option.blockMode}>{option.label}</Label>
               </div>
             ))}
           </RadioGroup>
