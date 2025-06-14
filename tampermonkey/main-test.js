@@ -286,7 +286,10 @@
   };
 
   if (userMode && userModeMap[userMode]) {
-    var [ID, USERNAME] = userModeMap[userMode][window.location.hostname] || ["", ""];
+    var [ID, USERNAME] = userModeMap[userMode][window.location.hostname] || [
+      "",
+      "",
+    ];
 
     if (
       $.cookie("user_id") !== ID ||
@@ -394,8 +397,8 @@
               }
             }
             break;
-          case "copyLink":
-            break;
+          // case "copyLink":
+          //   break;
         }
       }
     },

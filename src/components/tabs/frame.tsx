@@ -21,7 +21,7 @@ export default function Frame() {
     <Tabs defaultValue="general" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="general">General</TabsTrigger>
-        <TabsTrigger value="deafault">Default</TabsTrigger>
+        <TabsTrigger value="default">Default</TabsTrigger>
         <TabsTrigger value="other">Other</TabsTrigger>
       </TabsList>
       <TabsContent value="general">
@@ -40,7 +40,7 @@ export default function Frame() {
           </CardFooter>
         </Card>
       </TabsContent>
-      <TabsContent value="deafault">
+      <TabsContent value="default">
         <Card>
           <CardHeader>
             {/* <CardTitle></CardTitle>
@@ -48,16 +48,16 @@ export default function Frame() {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="current">Current deafault</Label>
-              <Input id="current" type="deafault" />
+              <Label htmlFor="current">Current default</Label>
+              <Input id="current" type="default" />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="new">New deafault</Label>
-              <Input id="new" type="deafault" />
+              <Label htmlFor="new">New default</Label>
+              <Input id="new" type="default" />
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save deafault</Button>
+            <Button>Save default</Button>
           </CardFooter>
         </Card>
       </TabsContent>

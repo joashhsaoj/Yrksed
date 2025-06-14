@@ -18,18 +18,39 @@ export default function CopyLink() {
     <Button
       className="rounded-none shadow-none first:rounded-s-md last:rounded-e-md focus-visible:z-10"
       variant="outline"
-      onClick={async () => {
-        await navigator.clipboard.writeText(
+      onClick={() => {
+        copyLink(
           `http://v1.chatbbq.cn/randomdeskrynew.html?touserid=${info.id}&tousername=${info.name}`
         );
-        alert("复制成功");
       }}
-      onDoubleClick={async () => {
-        await navigator.clipboard.writeText("复制到剪贴板的内容");
-        alert("复制成功");
+      onDoubleClick={() => {
+        copyLink(`touserid=${info.id}&tousername=${info.name}`);
       }}
     >
       Copy Link
     </Button>
   );
+}
+
+export function copyLink(text: string): void {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  try {
+    const successful = document.execCommand("copy");
+    if (successful) {
+      alert("复制成功");
+    } else {
+      alert("复制失败，请手动复制");
+    }
+  } catch (err) {
+    alert("复制异常: " + err);
+  }
+
+  document.body.removeChild(textarea);
 }
