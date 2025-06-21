@@ -149,7 +149,9 @@
 
     "v3.web1v1.cn": ["94b3b7cafcca4f359565a83bc936a0fb", "主动发露点照才算搔b"],
     "v30.web1v1.cn": [
-      "d778bb9a097a4836a773bb0a41295b9b",
+      // "d778bb9a097a4836a773bb0a41295b9b",
+      "94b3b7cafcca4f359565a83bc936a0fb",
+
       "主动发露点照才算搔b",
     ],
 
@@ -267,34 +269,26 @@
   }; //
 
   // if (userMode && userModeMap[userMode]) {
-  var [ID, USERNAME] = userModeMap[userMode]?.[window.location.hostname] ?? [
-    "",
-    "",
-  ];
-  console.log(
-    `油猴脚本: 当前用户模式: ${userMode}, ID: ${ID}, 用户名: ${USERNAME}`
-  );
+  var [ID, USERNAME, EXPIRES = 365] = userModeMap[userMode]?.[
+    window.location.hostname
+  ] ?? [null, null, -1];
 
   if (
+    !userModeMap[userMode] ||
     $.cookie("user_id") !== ID ||
-    $.cookie("user_nickname_random") != USERNAME ||
+    $.cookie("user_nickname_random") !== USERNAME ||
     $.cookie("userSex") !== "男"
   ) {
-    $.cookie("user_id", ID, { expires: 365 }); // $.cookie("user_id", "", { expires: 365 });
-    $.cookie("user_nickname_random", USERNAME, { expires: 365 }); // $.cookie("user_nickname_random", "", { expires: 365 });
+    $.cookie("user_id", ID, { expires: EXPIRES }); // $.cookie("user_id", "", { expires: 365 });
+    $.cookie("user_nickname_random", USERNAME, { expires: EXPIRES }); // $.cookie("user_nickname_random", "", { expires: 365 });
     $.cookie("userSex", "男", { expires: 365 });
     window.location.reload();
   }
-  // }
-  //  else {
-  //   $.cookie("user_id", null, { expires: -1 });
-  //   $.cookie("user_nickname_random", null, { expires: -1 });
-  //   window.location.reload();
-  // }
 
   document
     .getElementById("user_list")
     .addEventListener("click", function (event) {
+      //自动点击发送框
       container.contentWindow.postMessage(
         {
           type: "currentUser",

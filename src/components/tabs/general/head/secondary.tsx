@@ -42,35 +42,43 @@ export default function Secondary() {
   }, [gendersChecked]);
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
-      {/* ......space-x-4 px-4             px-2*/}
-      <div className="flex items-center justify-between">
-        {/* ...... */}
-        <h4 className="text-sm font-semibold">Some functions</h4>
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm" className="w-9 p-0">
-            <ChevronsUpDown className="h-4 w-4" />
-            <span className="sr-only">Toggle</span>
-          </Button>
-        </CollapsibleTrigger>
+    <>
+      <div className="flex justify-between">
+        <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
+          <CopyLink />
+          <DeleteUser />
+        </div>
       </div>
-      <CollapsibleContent>
-        <div className="border rounded-md p-1 space-y-1">
-          <PauseWhenNotBlock />
-          <Separator />
-          <BlockGenders
-            gendersChecked={gendersChecked}
-            setGendersChecked={setGendersChecked}
-          />
-          <Separator />
-          <div className="flex justify-between">
-            <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
-              <CopyLink />
-              <DeleteUser />
+      <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
+        {/* ......space-x-4 px-4             px-2*/}
+        <div className="flex items-center justify-between">
+          {/* ...... */}
+          <h4 className="text-sm font-semibold">Some functions</h4>
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm" className="w-9 p-0">
+              <ChevronsUpDown className="h-4 w-4" />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+        <CollapsibleContent>
+          <div className="border rounded-md p-1 space-y-1">
+            <PauseWhenNotBlock />
+            <Separator />
+            <BlockGenders
+              gendersChecked={gendersChecked}
+              setGendersChecked={setGendersChecked}
+            />
+            <Separator />
+            <div className="flex justify-between">
+              <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
+                <CopyLink />
+                <DeleteUser />
+              </div>
             </div>
           </div>
-        </div>
-      </CollapsibleContent>
-    </Collapsible>
+        </CollapsibleContent>
+      </Collapsible>
+    </>
   );
 }

@@ -44,12 +44,12 @@ export function copyLink(text: string): void {
   try {
     const successful = document.execCommand("copy");
     if (successful) {
-      alert("复制成功");
+      console.log("复制成功");
     } else {
-      alert("复制失败，请手动复制");
+      console.log("复制失败，请手动复制");
     }
   } catch (err) {
-    alert("复制异常: " + err);
+    console.log("复制异常: " + err);
   }
 
   document.body.removeChild(textarea);
