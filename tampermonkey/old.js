@@ -1,3 +1,9 @@
+// const oldUserMode = localStorage.getItem("userMode");
+// if (oldUserMode !== event.data.data) {
+//   localStorage.setItem("userMode", event.data.data); // console.log(event.data);
+//   window.location.reload();
+// }
+
 $(".title-center-roomcmd").remove();
 $("#msg_tips").remove();
 $("#theme_sun_moon").remove();
@@ -22,8 +28,6 @@ window.haveTitleTips = (msg) => {
     haveSoundTips();
   }
 };
-
-
 
 if ($.cookie("isMoon") !== 1) {
   $("#theme_sun_moon").click();

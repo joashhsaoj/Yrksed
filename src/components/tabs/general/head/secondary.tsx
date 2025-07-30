@@ -43,12 +43,6 @@ export default function Secondary() {
 
   return (
     <>
-      <div className="flex justify-between">
-        <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
-          <CopyLink />
-          <DeleteUser />
-        </div>
-      </div>
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
         {/* ......space-x-4 px-4             px-2*/}
         <div className="flex items-center justify-between">
@@ -79,6 +73,12 @@ export default function Secondary() {
           </div>
         </CollapsibleContent>
       </Collapsible>
+      <div className="flex justify-between">
+        <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
+          <CopyLink />
+          <DeleteUser />
+        </div>
+      </div>
     </>
   );
 }
