@@ -1,26 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
-
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import useLocalStorage from "@/hooks/useLocalStorage";
-
 export default function UserMode() {
-  const [userMode, setUserMode] = useLocalStorage("userMode");
-
-  useEffect(() => {
-    window.parent.postMessage({ type: "userMode", data: userMode }, "*");
-  }, [userMode]);
-
   return (
     <div className="flex items-center justify-between">
       <RadioGroup
-        value={userMode}
         onValueChange={(newValue: string) => {
-          setUserMode(newValue);
+          window.parent.postMessage({ type: "userMode", data: newValue }, "*");
         }}
         className="grid grid-cols-3 gap-2"
       >
