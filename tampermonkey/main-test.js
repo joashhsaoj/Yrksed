@@ -96,21 +96,19 @@
     // }
   });
 
-  document
-    .getElementById("user_list")
-    .addEventListener("click", function (event) {
-      $("#inp_say").focus(); // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
-      container.contentWindow.postMessage(
-        {
-          type: "currentUser",
-          data: {
-            id: sel_userid,
-            name: event.target.textContent,
-          },
+  $("#user_list").addEventListener("click", function (event) {
+    $("#inp_say").focus(); // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
+    container.contentWindow.postMessage(
+      {
+        type: "currentUser",
+        data: {
+          id: sel_userid,
+          name: event.target.textContent,
         },
-        "https://yrksed.vercel.app"
-      );
-    });
+      },
+      "https://yrksed.vercel.app"
+    );
+  });
 
   const userModes = {
     default: {
@@ -152,16 +150,16 @@
     $.cookie("user_id", ID, { expires: EXPIRES });
     $.cookie("user_nickname_random", USERNAME, { expires: EXPIRES });
     $.cookie("userSex", "男", { expires: EXPIRES });
-    !userModes[userMode] && location.reload();
+    location.reload(); //!userModes[userMode] &&
   }
 
-  // var dic_userlists = {};
-
-  ws.close();
+  //----------------------------------------------------------------------------
+  ws.close(); // var dic_userlists = {};
 
   var code;
 
-  var gendersChecked;
+  var sexsChecked;
+  const sexKeyMap = { 男: "male", 女: "female", 保密: "unknown" };
 
   const OriginalWebSocket = window.WebSocket;
   // 覆盖 WebSocket 构造函数
@@ -185,11 +183,7 @@
             $(`#userid_${data.sel_userid}`).remove();
           }, 1);
         }
-        if (
-          (data.sel_userSex === "男" && gendersChecked.male) ||
-          (data.sel_userSex === "女" && gendersChecked.female) ||
-          (data.sel_userSex === "保密" && gendersChecked.unknown)
-        ) {
+        if (sexsChecked[sexKeyMap[data.sel_userSex]]) {
           sendJson("warningreport", data.sel_userid, true);
         }
       }
@@ -200,41 +194,33 @@
   console.log("油猴脚本: WebSocket 构造函数已成功覆盖。");
   //----------------------------------------------------------------------------
   let intervalId = null;
-  window.addEventListener(
-    "message",
-    (event) => {
-      if (event.origin === "https://yrksed.vercel.app") {
-        const { type, data } = event.data;
-        switch (type) {
-          case "userMode":
-            if (localStorage.getItem("userMode") !== event.data.data) {
-              window.location.reload();
-            } //nextjs无需创建localstorage的hooks，只需发给
-            // localStorage.getItem("userMode") !== data && location.reload();
-            // localStorage.setItem("userMode", data);
-            location.reload(); //待处理，在空白浏览器打开是什么样，改成sessionStorage
-            break;
-          case "gendersChecked":
-            gendersChecked = data;
-            break;
-          case "state":
-            if (data) {
-              intervalId = setInterval(() => {
-                sendJson("random", "", true);
-              }, 1500);
-            } else {
-              if (intervalId !== null) {
-                clearInterval(intervalId);
-                intervalId = null;
-              }
+  window.addEventListener("message", (event) => {
+    if (event.origin === "https://yrksed.vercel.app") {
+      const { type, data } = event.data;
+      switch (type) {
+        case "userMode":
+          localStorage.setItem("userMode", data);
+          location.reload(); // localStorage.getItem("userMode") !== data && location.reload(); // D
+          break;
+        case "sexsChecked":
+          sexsChecked = data;
+          break;
+        case "state":
+          if (data) {
+            intervalId = setInterval(() => {
+              sendJson("random", "", true);
+            }, 1500);
+          } else {
+            if (intervalId !== null) {
+              clearInterval(intervalId);
+              intervalId = null;
             }
-            //点击空白
-            break; // case "copyLink": break;
-        }
+          }
+          //点击空白
+          break; // case "copyLink": break;
       }
-    },
-    false
-  );
+    }
+  });
 })();
 
 /* // $("#ButtonRandom").click() 
@@ -254,7 +240,7 @@
 // $("#doBlack").click();
 // $(".layui-layer-btn0").click();
 
-// console.table([{ name: name, gender: gender, age: age, location: location }]);
+// console.table([{ name: name, sex: sex, age: age, location: location }]);
 
 // case 7:
 //  fun_fromusermsg(json);

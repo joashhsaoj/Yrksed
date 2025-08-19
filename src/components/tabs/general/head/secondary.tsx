@@ -11,21 +11,28 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 import { ChevronsUpDown } from "lucide-react";
-import PauseWhenNotBlock from "./pause-when-not-block";
-import BlockGenders from "./block-genders";
-import DeleteUser from "./delete-user";
-import CopyLink from "./copy-link";
 
-type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
+import useSessionStorage from "@/hooks/useSessionStorage";
+
+import BlockSexs from "./block-sexs";
+import CopyLink from "./copy-link";
+import DeleteUser from "./delete-user";
+import PauseWhenNotBlock from "./pause-when-not-block";
+
+type sexsChecked = Record<"male" | "female" | "unknown", boolean>;
+
+export const SexsCheckedContext = createContext<
+  | {
+      sexsChecked: sexsChecked;
+      setSexsChecked: React.Dispatch<React.SetStateAction<sexsChecked>>;
+    }
+  | undefined
+>(undefined);
 
 export default function Secondary() {
-  // const [userMode] = useLocalStorage("userMode");
-  const [userMode] = useState("userMode");
-  const userModeContext = createContext();
+  const [userMode] = useSessionStorage("userMode"); // const [userMode] = useState("userMode"); // D
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [gendersChecked, setGendersChecked] = useState<GendersChecked>({
+  const [sexsChecked, setSexsChecked] = useState<sexsChecked>({
     male: userMode !== "origin",
     female: !["default", "origin"].includes(userMode),
     unknown: userMode !== "origin",
@@ -34,13 +41,14 @@ export default function Secondary() {
   useEffect(() => {
     window.parent.postMessage(
       {
-        type: "gendersChecked",
-        data: gendersChecked,
+        type: "sexsChecked",
+        data: sexsChecked,
       },
       "*"
     );
-  }, [gendersChecked]);
+  }, [sexsChecked]); // U
 
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
@@ -59,10 +67,11 @@ export default function Secondary() {
           <div className="border rounded-md p-1 space-y-1">
             <PauseWhenNotBlock />
             <Separator />
-            <BlockGenders
-              gendersChecked={gendersChecked}
-              setGendersChecked={setGendersChecked}
-            />
+            <SexsCheckedContext.Provider
+              value={{ sexsChecked, setSexsChecked }}
+            >
+              <BlockSexs />
+            </SexsCheckedContext.Provider>
             <Separator />
             <div className="flex justify-between">
               <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">

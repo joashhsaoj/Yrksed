@@ -1,36 +1,30 @@
+import { useContext } from "react";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
+import { SexsCheckedContext } from "./secondary";
 
-interface BlockGendersProps {
-  gendersChecked: GendersChecked;
-  setGendersChecked: React.Dispatch<React.SetStateAction<GendersChecked>>;
-}
-
-export default function BlockGenders({
-  gendersChecked,
-  setGendersChecked,
-}: BlockGendersProps) {
-  const genders = [
+export default function BlockSexs({}) {
+  const sexs = [
     { id: "male", label: "Male" },
     { id: "female", label: "Female" },
     { id: "unknown", label: "Unknown" },
   ] as const;
 
+  const { sexsChecked, setSexsChecked } = useContext(SexsCheckedContext)!;
+
   return (
     <div className="flex flex-col gap-2 p-2">
-      <p>Block Genders</p>
+      <p>Block sexs</p>
       <div className="flex justify-between">
-        {genders.map(({ id, label }) => (
-          // ......
+        {sexs.map(({ id, label }) => (
           <div key={id} className="flex items-center space-x-2">
-            {/* ...... */}
             <Checkbox
-              checked={gendersChecked[id]}
               id={id}
+              checked={sexsChecked[id]}
               onCheckedChange={() =>
-                setGendersChecked((prev) => ({ ...prev, [id]: !prev[id] }))
+                setSexsChecked((prev) => ({ ...prev, [id]: !prev[id] }))
               }
             />
             <Label htmlFor={id}>{label}</Label>

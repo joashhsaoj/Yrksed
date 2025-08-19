@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useState } from "react";
 
 import { Button } from "@/components/ui/button";
