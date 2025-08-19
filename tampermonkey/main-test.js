@@ -95,20 +95,22 @@
     $("#inp_say").focus();
     // }
   });
-
-  $("#user_list").addEventListener("click", function (event) {
-    $("#inp_say").focus(); // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
-    container.contentWindow.postMessage(
-      {
-        type: "currentUser",
-        data: {
-          id: sel_userid,
-          name: event.target.textContent,
+  
+  document
+    .getElementById("user_list")
+    .addEventListener("click", function (event) {
+      $("#inp_say").focus(); // event.preventDefault();// 如果需要阻止默认行为（比如阻止跳转）
+      container.contentWindow.postMessage(
+        {
+          type: "currentUser",
+          data: {
+            id: sel_userid,
+            name: event.target.textContent,
+          },
         },
-      },
-      "https://yrksed.vercel.app"
-    );
-  });
+        "https://yrksed.vercel.app"
+      );
+    });
 
   const userModes = {
     default: {
