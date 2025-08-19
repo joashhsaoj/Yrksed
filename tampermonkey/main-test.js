@@ -4,7 +4,6 @@
 // @version   0.1
 // @description Load a Next.js project hosted on Vercel into the current page
 // @author    Your Name
-// @match    http://*/*
 // @match    http://*.70os.top/*
 // @match    http://*.chat1v1.cn/*
 // @match    http://*.web1v1.cn/*
@@ -18,10 +17,6 @@
 
 (function () {
   "use strict"; // 检查是否在 iframe 内部运行
-
-  if (window.self !== window.top) {
-    return; // 如果在 iframe 内部运行，则退出脚本
-  }
 
   const container = document.createElement("iframe");
   container.src = "https://yrksed.vercel.app";
@@ -167,6 +162,7 @@
   var code;
 
   var gendersChecked;
+
   const OriginalWebSocket = window.WebSocket;
   // 覆盖 WebSocket 构造函数
   window.WebSocket = function (url, protocols) {

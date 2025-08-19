@@ -106,3 +106,9 @@ $("#manageUser_DelAll").addEventListener("click", function (event) {
 
 //获取当前的用户id
 // sendJson("random", "", true);
+
+var gendersChecked = {
+  male: userMode !== "origin",
+  female: !["default", "origin"].includes(userMode),
+  unknown: userMode !== "origin",
+};

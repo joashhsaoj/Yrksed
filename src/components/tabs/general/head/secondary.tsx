@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import useLocalStorage from "@/hooks/useLocalStorage";
+import { createContext, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +19,9 @@ import CopyLink from "./copy-link";
 type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
 
 export default function Secondary() {
-  const [userMode] = useLocalStorage("userMode");
+  // const [userMode] = useLocalStorage("userMode");
+  const [userMode] = useState("userMode");
+  const userModeContext = createContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
