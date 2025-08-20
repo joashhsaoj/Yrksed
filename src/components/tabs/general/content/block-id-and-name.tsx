@@ -14,9 +14,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ChevronsUpDown } from "lucide-react";
 
 export default function BlockIDAndName() {
-  const [isOpen, setIsOpen] = useState(false);
-  // const [mode, setMode] = useState("m0");
-
   const [info, setInfo] = useState({ id: "", name: "" });
 
   useEffect(() => {
@@ -27,6 +24,7 @@ export default function BlockIDAndName() {
     });
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Collapsible
       open={isOpen}
