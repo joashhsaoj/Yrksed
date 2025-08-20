@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 
 import { SexsCheckedContext } from "./secondary";
 
-export default function BlockSexs({}) {
+export default function BlockSexs() {
   const sexs = [
     { id: "male", label: "Male" },
     { id: "female", label: "Female" },

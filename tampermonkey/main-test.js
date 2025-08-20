@@ -95,7 +95,7 @@
     $("#inp_say").focus();
     // }
   });
-  
+
   document
     .getElementById("user_list")
     .addEventListener("click", function (event) {
@@ -202,7 +202,10 @@
       switch (type) {
         case "userMode":
           localStorage.setItem("userMode", data);
-          location.reload(); // localStorage.getItem("userMode") !== data && location.reload(); // D
+          location.reload();
+          break;
+        case "manualBlock":
+          $("#doBlack").click();
           break;
         case "sexsChecked":
           sexsChecked = data;
@@ -234,13 +237,10 @@
 //  JSON.stringify({ act: "random", id: $.cookie("user_id"), userAge: userAge })
 // );
 
-//注销
+//注销和拉黑
 // $("#btn_xf").click();
-// $(".layui-layer-btn0").click();
-
-//拉黑
 // $("#doBlack").click();
-// $(".layui-layer-btn0").click();
+// $(".layui-layer-btn0").click(); //点击确认和取消
 
 // console.table([{ name: name, sex: sex, age: age, location: location }]);
 

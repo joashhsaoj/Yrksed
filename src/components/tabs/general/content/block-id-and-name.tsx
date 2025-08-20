@@ -51,13 +51,29 @@ export default function BlockIDAndName() {
               { blockMode: "m2", label: "Name" },
               { blockMode: "m3", label: "ID + Name" },
             ].map((option) => (
-              <div key={option.blockMode} className="flex items-center space-x-2">
-                <RadioGroupItem value={option.blockMode} id={option.blockMode} />
+              <div
+                key={option.blockMode}
+                className="flex items-center space-x-2"
+              >
+                <RadioGroupItem
+                  value={option.blockMode}
+                  id={option.blockMode}
+                />
                 <Label htmlFor={option.blockMode}>{option.label}</Label>
               </div>
             ))}
           </RadioGroup>
-          <Button>Block</Button>
+          <Button
+            onClick={() => {
+              window.parent.postMessage(
+                { type: "manualBlock", data: { info } },
+                "*"
+              );
+              console.log("Block ID and Name:", info);
+            }}
+          >
+            Block
+          </Button>
         </div>
       </CollapsibleContent>
     </Collapsible>
