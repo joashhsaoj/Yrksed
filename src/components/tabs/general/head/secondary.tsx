@@ -50,7 +50,7 @@ export default function Secondary() {
 
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <>
+    <SexsCheckedContext.Provider value={{ sexsChecked, setSexsChecked }}>
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
         {/* ......space-x-4 px-4             px-2*/}
         <div className="flex items-center justify-between">
@@ -67,17 +67,11 @@ export default function Secondary() {
           <div className="border rounded-md p-1 space-y-1">
             <PauseWhenNotBlock />
             <Separator />
-            <SexsCheckedContext.Provider
-              value={{ sexsChecked, setSexsChecked }}
-            >
-              <BlockSexs />
-            </SexsCheckedContext.Provider>
+            <BlockSexs />
             <Separator />
-            <div className="flex justify-between">
-              <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
-                <CopyLink />
-                <DeleteUser />
-              </div>
+            <div className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse">
+              <CopyLink />
+              <DeleteUser />
             </div>
           </div>
         </CollapsibleContent>
@@ -88,6 +82,6 @@ export default function Secondary() {
           <DeleteUser />
         </div>
       </div>
-    </>
+    </SexsCheckedContext.Provider>
   );
 }

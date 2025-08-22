@@ -219,6 +219,7 @@
               clearInterval(intervalId);
               intervalId = null;
             }
+            
           }
           //点击空白
           break; // case "copyLink": break;
