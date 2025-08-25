@@ -197,20 +197,21 @@
   let intervalId = null;
   window.addEventListener("message", (event) => {
     if (event.origin === "https://yrksed.vercel.app") {
-      const { type, data } = event.data;
-      switch (type) {
+      switch (
+        event.data.type // const { type, data } = event.data;
+      ) {
         case "userMode":
-          localStorage.setItem("userMode", data);
+          localStorage.setItem("userMode", event.data.data);
           location.reload();
           break;
         case "manualBlock":
           $("#doBlack").click();
           break;
         case "sexsChecked":
-          sexsChecked = data;
+          sexsChecked = event.data.data;
           break;
         case "state":
-          if (data) {
+          if (event.data.data) {
             intervalId = setInterval(() => {
               sendJson("random", "", true);
             }, 1500);
@@ -219,7 +220,6 @@
               clearInterval(intervalId);
               intervalId = null;
             }
-            
           }
           //点击空白
           break; // case "copyLink": break;
@@ -264,8 +264,7 @@ fun_userchgsexaddress()
 
 // $.cookie("randomVipCode");
 // randomVipCode = "vipali6458eb4edee1265071526072";
-// document.cookie =
-//  "randomVipCode=vipali6458eb4edee1265071526072; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+// document.cookie = "randomVipCode=vipali6458eb4edee1265071526072; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
 
 // function fun_setUserSexAdderss() {
 //  fun_setUserAge();

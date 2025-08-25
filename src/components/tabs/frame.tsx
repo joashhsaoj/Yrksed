@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,12 +20,16 @@ import StartAndStop from "./general/footer/start-and-stop";
 import Secondary from "./general/head/secondary";
 import UserMode from "./other/user-mode";
 
-export const UserModeContext = createContext(undefined);
+import useSessionStorage from "@/hooks/useSessionStorage";
+
+export const UserModeContext = createContext<
+  { userMode: string; setUserMode: (mode: string) => void } | undefined
+>(undefined);
 
 export default function Frame() {
-  const [userMode] = useState();
+  const [userMode, setUserMode] = useSessionStorage("userMode");
   return (
-    <UserModeContext.Provider value={userMode}>
+    <UserModeContext.Provider value={{ userMode, setUserMode }}>
       <Tabs defaultValue="general" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="general">General</TabsTrigger>
