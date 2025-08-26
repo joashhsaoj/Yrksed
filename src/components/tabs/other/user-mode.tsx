@@ -20,12 +20,12 @@ export default function UserMode() {
         className="grid grid-cols-3 gap-2"
       >
         {[
-          { value: "default", label: "Default" },
-          { value: "zhegou", label: "ZheGou" },
-          { value: "maren", label: "MaRen" },
-          { value: "wangtu", label: "WangTu" },
-          { value: "other", label: "Other" },
-          { value: "origin", label: "Origin" },
+          { label: "Default", value: "default" },
+          { label: "Zhegou", value: "zhegou" },
+          { label: "Maren", value: "maren" },
+          { label: "Wangtu", value: "wangtu" },
+          { label: "Other", value: "other" },
+          { label: "Origin", value: "origin" },
         ].map((option) => (
           <div key={option.value} className="flex items-center space-x-2">
             <RadioGroupItem value={option.value} id={option.value} />

@@ -12,9 +12,11 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { ChevronsUpDown } from "lucide-react";
+import { createClient } from "@/utils/supabase/client";
 
 export default function BlockIDAndName() {
   const [info, setInfo] = useState({ id: "", name: "" });
+  // const [blockMode, setBlockMode] = useState("m0");
 
   useEffect(() => {
     window.addEventListener("message", (event) => {
@@ -44,20 +46,14 @@ export default function BlockIDAndName() {
         <div className="flex items-center justify-between">
           <RadioGroup defaultValue="m0" className="grid grid-cols-2 gap-2">
             {[
-              { blockMode: "m0", label: "Default" },
-              { blockMode: "m1", label: "ID" },
-              { blockMode: "m2", label: "Name" },
-              { blockMode: "m3", label: "ID + Name" },
+              { label: "Default", value: "m0" },
+              { label: "ID", value: "m1" },
+              { label: "Name", value: "m2" },
+              { label: "ID & Name", value: "m3" },
             ].map((option) => (
-              <div
-                key={option.blockMode}
-                className="flex items-center space-x-2"
-              >
-                <RadioGroupItem
-                  value={option.blockMode}
-                  id={option.blockMode}
-                />
-                <Label htmlFor={option.blockMode}>{option.label}</Label>
+              <div key={option.value} className="flex items-center space-x-2">
+                <RadioGroupItem value={option.value} id={option.value} />
+                <Label htmlFor={option.value}>{option.label}</Label>
               </div>
             ))}
           </RadioGroup>
@@ -76,4 +72,9 @@ export default function BlockIDAndName() {
       </CollapsibleContent>
     </Collapsible>
   );
+}
+
+export function Test() {
+  // const supabase = createClient();
+  // const { data } = supabase.from("id and name").select();
 }

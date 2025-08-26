@@ -89,9 +89,7 @@
 
   window.addEventListener("keydown", () => {
     // if (document.activeElement !== input) {
-    // if (document.activeElement?.tagName === "IFRAME") {
-    //   document.activeElement.blur();
-    // }
+    // if (document.activeElement?.tagName === "IFRAME") { document.activeElement.blur(); }
     $("#inp_say").focus();
     // }
   });
@@ -172,6 +170,10 @@
     ws.addEventListener("message", function (event) {
       const data = JSON.parse(event.data);
       code = data.code;
+
+      if (code === 22) {
+      }
+
       console.log("油猴脚本: 收到 WebSocket 消息:", data); // 可以用于调试
 
       if (data && data.code === 15) {
@@ -193,13 +195,11 @@
     return ws; // 返回修改后的 WebSocket 实例
   };
   console.log("油猴脚本: WebSocket 构造函数已成功覆盖。");
-  //----------------------------------------------------------------------------
+  //---------------------------------------------------------------------------- // const { type, data } = event.data;
   let intervalId = null;
   window.addEventListener("message", (event) => {
     if (event.origin === "https://yrksed.vercel.app") {
-      switch (
-        event.data.type // const { type, data } = event.data;
-      ) {
+      switch (event.data.type) {
         case "userMode":
           localStorage.setItem("userMode", event.data.data);
           location.reload();
@@ -244,9 +244,7 @@
 
 // console.table([{ name: name, sex: sex, age: age, location: location }]);
 
-// case 7:
-//  fun_fromusermsg(json);
-//  break; //用户发送的新私信
+// case 7: fun_fromusermsg(json); break; //用户发送的新私信
 //case 8: fun_getprivmsg(json); break;//获取私信内容
 
 fun_userchgsexaddress()
