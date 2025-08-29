@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { createClient } from "@/utils/supabase/client";
+
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
@@ -12,19 +14,34 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { ChevronsUpDown } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
 
 export default function BlockIDAndName() {
   const [info, setInfo] = useState({ id: "", name: "" });
   // const [blockMode, setBlockMode] = useState("m0");
 
   useEffect(() => {
-    window.addEventListener("message", (event) => {
+    const handler = (event: MessageEvent) => {
       if (event.data.type === "currentUser") {
         setInfo(event.data.data);
       }
-    });
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
   }, []);
+
+  async function upsertUsers() {
+    const supabase = createClient();
+
+    const { data: users, error } = await supabase
+      .from("users") // .upsert({ id: info.id, name: info.name, time: new Date() })
+      .select();
+
+    if (error) {
+      console.error("Upsert 失败:", error.message);
+    } else {
+      console.log("Upsert 成功:", users);
+    }
+  }
 
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -63,6 +80,7 @@ export default function BlockIDAndName() {
                 { type: "manualBlock", data: { info } },
                 "*"
               );
+              upsertUsers();
               console.log("Block ID and Name:", info);
             }}
           >
@@ -72,9 +90,4 @@ export default function BlockIDAndName() {
       </CollapsibleContent>
     </Collapsible>
   );
-}
-
-export function Test() {
-  // const supabase = createClient();
-  // const { data } = supabase.from("id and name").select();
 }
