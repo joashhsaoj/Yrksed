@@ -29,17 +29,22 @@ export default function BlockIDAndName() {
     return () => window.removeEventListener("message", handler);
   }, []);
 
-  async function upsertUsers() {
+  async function upsertUsers(table: string, value?: string) {
     const supabase = createClient();
 
-    const { data: users, error } = await supabase
-      .from("users") // .upsert({ id: info.id, name: info.name, time: new Date() })
+    const now = new Date();
+    const time = now.toLocaleString("sv-SE"); // console.log("Current Time (sv-SE):", time);
+    // .upsert({ id: info.id, name: info.name, time: time, times: 1 })
+
+    const { data, error } = await supabase
+      .from(table)
+      .upsert({ [table.slice(0, -1)]: value || "2", time: time, times: 1 })
       .select();
 
     if (error) {
       console.error("Upsert 失败:", error.message);
     } else {
-      console.log("Upsert 成功:", users);
+      console.log("Upsert 成功:", data);
     }
   }
 
@@ -80,8 +85,9 @@ export default function BlockIDAndName() {
                 { type: "manualBlock", data: { info } },
                 "*"
               );
-              upsertUsers();
-              console.log("Block ID and Name:", info);
+              upsertUsers("ids", info.id);
+              upsertUsers("names", info.name);
+              // console.log("Block ID and Name:", info);
             }}
           >
             Block
